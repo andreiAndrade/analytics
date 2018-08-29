@@ -13,3 +13,4 @@
 - [ ] Generate outcome file
 - [ ] System running in background
 - [ ] Refactor
+- [ ] Multiplicar valor por quantidade de itens
