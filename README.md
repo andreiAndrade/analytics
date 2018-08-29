@@ -12,3 +12,4 @@
     - [ ] Find worse salesman
 - [ ] Generate outcome file
 - [ ] System running in background
+- [ ] Refactor
