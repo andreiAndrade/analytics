@@ -14,3 +14,4 @@
 - [x] System running in background
 - [ ] Refactor
 - [x] Multiplicar valor por quantidade de itens
+- [x] Documentar

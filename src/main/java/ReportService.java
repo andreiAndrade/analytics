@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.AbstractMap;
 import java.util.Arrays;
@@ -10,9 +9,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Serviço que aplica as regras de geração de relatórios de acordo com a especificação.
+ *
+ * @author <a href="mailto:andreirsandrade@gmail.com.br">Andrei Andrade</a>
+ * @since 30/08/2018 16:36:00
+ */
 public class ReportService {
 
-    public static Report generateReport() throws IOException {
+    /**
+     * Gera o relatório dos arquivos .dat encontrado no caminho de origem.
+     *
+     * @return um relatório com as informações especificadas
+     */
+    public static Report generateReport() {
         List<Path> fileList = FileService.readPath();
 
         if (Objects.nonNull(fileList)) {
@@ -25,12 +35,20 @@ public class ReportService {
             report.setMostExpansiveSaleId(findMostExpansiveSaleId(rowList));
             report.setWorstSalesman(findWorstSalesman(rowList));
 
-            FileService.createFile(report);
+            FileService.createReportFile(report);
 
             return report;
         }
 
         return null;
+    }
+
+    private static long countSalesmen(List<String> rowList) {
+        return rowList.stream().filter(row -> row.startsWith("001")).distinct().count();
+    }
+
+    private static long countClients(List<String> rowList) {
+        return rowList.stream().filter(row -> row.startsWith("002")).distinct().count();
     }
 
     private static String findWorstSalesman(List<String> rowList) {
@@ -95,13 +113,5 @@ public class ReportService {
 
             return amount * price;
         }).sum();
-    }
-
-    private static long countSalesmen(List<String> rowList) {
-        return rowList.stream().filter(row -> row.startsWith("001")).distinct().count();
-    }
-
-    private static long countClients(List<String> rowList) {
-        return rowList.stream().filter(row -> row.startsWith("002")).distinct().count();
     }
 }
