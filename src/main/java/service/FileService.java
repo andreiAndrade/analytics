@@ -1,3 +1,7 @@
+package service;
+
+import model.Report;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -76,6 +80,10 @@ public class FileService {
         }
 
         return Stream.empty();
+    }
+
+    public static List<String> readFile(List<Path> pathList) {
+        return pathList.stream().flatMap(FileService::readFile).collect(Collectors.toList());
     }
 
     public static Path getSourcePath() {

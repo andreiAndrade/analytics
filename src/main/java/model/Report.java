@@ -1,8 +1,41 @@
+package model;
+
+import java.util.List;
+
 public class Report {
-    private long  clientCount;
+
+    private List<Salesman> salesmanList;
+    private List<Client> clientList;
+    private List<Sale> saleList;
+
+    private long clientCount;
     private long salesmenCount;
     private Integer mostExpansiveSaleId;
     private String worstSalesman;
+
+    public List<Salesman> getSalesmanList() {
+        return salesmanList;
+    }
+
+    public void setSalesmanList(List<Salesman> salesmanList) {
+        this.salesmanList = salesmanList;
+    }
+
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
+    }
+
+    public List<Sale> getSaleList() {
+        return saleList;
+    }
+
+    public void setSaleList(List<Sale> saleList) {
+        this.saleList = saleList;
+    }
 
     public long getClientCount() {
         return clientCount;
@@ -38,7 +71,7 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Report{"
+        return "model.Report{"
                 + "clientCount=" + clientCount
                 + ", salesmenCount=" + salesmenCount
                 + ", mostExpansiveSaleId=" + mostExpansiveSaleId
