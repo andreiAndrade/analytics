@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class ReportService {
 
     public static Report generateReport() throws IOException {
-        List<Path> fileList = FileReader.readPath();
+        List<Path> fileList = FileService.readPath();
 
         if (Objects.nonNull(fileList)) {
             List<String> rowList = fileList.stream()
@@ -27,6 +27,8 @@ public class ReportService {
             report.setSalesmenCount(countSalesmen(rowList));
             report.setMostExpansiveSaleId(findMostExpansiveSaleId(rowList));
             report.setWorstSalesman(findWorstSalesman(rowList));
+
+            FileService.createFile(report);
 
             return report;
         }
