@@ -11,6 +11,6 @@
     - [x] Find most expansive sale
     - [x] Find worse salesman
 - [x] Generate outcome file
-- [ ] System running in background
+- [x] System running in background
 - [ ] Refactor
 - [x] Multiplicar valor por quantidade de itens

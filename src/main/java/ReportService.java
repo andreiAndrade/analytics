@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.AbstractMap;
 import java.util.Arrays;
@@ -10,7 +9,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ReportService {
 
@@ -18,8 +16,7 @@ public class ReportService {
         List<Path> fileList = FileService.readPath();
 
         if (Objects.nonNull(fileList)) {
-            List<String> rowList = fileList.stream()
-                    .flatMap(ReportService::readFile).collect(Collectors.toList());
+            List<String> rowList = fileList.stream().flatMap(FileService::readFile).collect(Collectors.toList());
 
             Report report = new Report();
 
@@ -34,16 +31,6 @@ public class ReportService {
         }
 
         return null;
-    }
-
-    private static Stream<String> readFile(Path path) {
-        try {
-            return Files.lines(path);
-        } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao ler este arquivo: " + e.getMessage());
-        }
-
-        return Stream.empty();
     }
 
     private static String findWorstSalesman(List<String> rowList) {
