@@ -45,7 +45,7 @@ public class PatternService {
 
     public static String getSaleRowPattern() {
         return Objects.isNull(saleRowPattern)
-                ? saleRowPattern = concat(SALE_CODE_PATTERN, "(\\d+)", ITEMS_PATTERN, NAME_PATTERN)
+                ? saleRowPattern = concat(SALE_CODE_PATTERN, "\\d+", ITEMS_PATTERN, NAME_PATTERN)
                 : saleRowPattern;
     }
 

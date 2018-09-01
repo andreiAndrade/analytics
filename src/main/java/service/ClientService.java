@@ -23,13 +23,13 @@ public class ClientService {
             Matcher matcher = pattern.matcher(sClient);
 
             if (matcher.matches()) {
-                Client clt = new Client();
+                Client client = new Client();
 
-                clt.setCnpj(matcher.group(1));
-                clt.setNome(matcher.group(2));
-                clt.setBusinessArea(matcher.group(3));
+                client.setCnpj(matcher.group(1));
+                client.setNome(matcher.group(2));
+                client.setBusinessArea(matcher.group(3));
 
-                return clt;
+                return client;
             }
         }
 

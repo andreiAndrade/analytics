@@ -3,6 +3,7 @@ package service;
 import model.Sale;
 
 import java.math.BigDecimal;
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +29,9 @@ public class SaleService {
             if (matcher.matches()) {
                 Sale sale = new Sale();
 
-                sale.setId(Integer.parseInt(matcher.group(1)));
-                sale.setItemList(ItemService.mapToItemList(matcher.group(2)));
-                sale.setSalesmanName(matcher.group(3));
+                sale.setId(Integer.parseInt(matcher.group(2)));
+                sale.setItemList(ItemService.mapToItemList(matcher.group(4)));
+                sale.setSalesmanName(matcher.group(5));
 
                 return sale;
             }
@@ -49,13 +50,31 @@ public class SaleService {
             if (salesmanSales.containsKey(sale.getSalesmanName())) {
                 salesmanSales.put(sale.getSalesmanName(), totalSaleValue.add(salesmanSales.get(sale.getSalesmanName())));
             } else {
-                salesmanSales.put(salesmanName, totalSaleValue);
+                salesmanSales.put(sale.getSalesmanName(), totalSaleValue);
             }
         }
 
-        Map.Entry<String, Double> worstSalesman = salesmanSales.entrySet().stream()
+        Map.Entry<String, BigDecimal> worstSalesman = salesmanSales.entrySet().stream()
                 .min(Map.Entry.comparingByValue()).orElse(null);
 
         return Objects.nonNull(worstSalesman) ? worstSalesman.getKey() : null;
+    }
+
+    public static Integer findMostExpansiveSaleId(List<Sale> saleList) {
+        if (Objects.isNull(saleList)) {
+            return null;
+        }
+
+        Map.Entry<Integer, BigDecimal> mostExpansiveSale = null;
+
+        for (Sale sale : saleList) {
+            BigDecimal totalSaleValue = ItemService.calculatePurchaseValue(sale.getItemList());
+
+            if (Objects.isNull(mostExpansiveSale) || mostExpansiveSale.getValue().compareTo(totalSaleValue) < 0) {
+                mostExpansiveSale = new AbstractMap.SimpleEntry<>(sale.getId(), totalSaleValue);
+            }
+        }
+
+        return Objects.nonNull(mostExpansiveSale) ? mostExpansiveSale.getKey() : null;
     }
 }

@@ -26,9 +26,9 @@ public class SalesmanService {
             if (matcher.matches()) {
                 Salesman salesman = new Salesman();
 
-                salesman.setCpf(matcher.group(1));
-                salesman.setNome(matcher.group(2));
-                salesman.setSalary(new BigDecimal(matcher.group(3)));
+                salesman.setCpf(matcher.group(2));
+                salesman.setNome(matcher.group(3));
+                salesman.setSalary(new BigDecimal(matcher.group(4)));
 
                 return salesman;
             }
